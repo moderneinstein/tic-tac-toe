@@ -171,6 +171,7 @@ public class MyClass {
             int pos = sr.nextInt();
             if(pos > 9 || pos < 0){
                 System.out.println("Enter Valid Position");
+                continue;
             }
             if(moves[pos-1] == 1){
                 System.out.println("Position already filled");
