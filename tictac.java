@@ -4,6 +4,7 @@ import static java.lang.Math.min;
 
 public class MyClass {
     public static void printboard(char[][] board) {
+        System.out.println("Board:");
         for(char[] row : board){
             for(char c : row)
                 System.out.print(c + " ");
@@ -42,8 +43,6 @@ public class MyClass {
             case 9:
                 board[2][2]=sym;
                 break;
-            default:
-                System.out.println("Enter a valid position!");
         }
     }
     
@@ -162,12 +161,17 @@ public class MyClass {
         char[][] board;
         int moves[] = new int[9];
         boolean got_winner = false;
+        System.out.println("User is X. Computer is O.");
+        System.out.println("Positions:\n1 2 3\n4 5 6\n7 8 9");
         board = new char[][]{{'_','_','_'},{'_','_','_'},{'_','_','_'}};
         Scanner sr = new Scanner(System.in);
         printboard(board);
         while(movesLeft(board)){
             System.out.println("Enter position from 1-9: ");
             int pos = sr.nextInt();
+            if(pos > 9 || pos < 0){
+                System.out.println("Enter Valid Position");
+            }
             if(moves[pos-1] == 1){
                 System.out.println("Position already filled");
                 continue;
@@ -177,8 +181,8 @@ public class MyClass {
             int[] h = bestMove(board);
             if(checkwin(board) == 10){
                 got_winner = true;
-                System.out.println("You win");
                 printboard(board);
+                System.out.println("\nYou win");
                 break;
             }
             pos = getPosition(h);
@@ -186,14 +190,13 @@ public class MyClass {
             insert(board, pos, 'O');
             if(checkwin(board) == -10){
                 got_winner = true;
-                System.out.println("Computer Wins");
                 printboard(board);
+                System.out.println("\nComputer Wins");
                 break;
             }
             printboard(board);
         }
         if(!got_winner)
-            System.out.println("Match Draw");
+            System.out.println("\nMatch Draw");
     }
 }
-
